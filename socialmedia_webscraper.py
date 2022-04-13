@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import time
 from requests.exceptions import Timeout
+from requests.exceptions import ConnectionError
 
 
 #Reading the list of URL from a CSV File -- makes is scalable to address 'n' number of URL
@@ -38,12 +39,22 @@ for url in df['List of URL']:
         print("Timeout has been raised")
         sm_sites_present.append('{}')
         time.sleep(3)
+        continue
     except requests.exceptions.TooManyRedirects:
         print("Too many redirects")
         sm_sites_present.append('{}')
         time.sleep(3)
+        continue
+    except ConnectionError:
+        print("Badly Formatted URL")
+        sm_sites_present.append('{}')
+        time.sleep(3)
+        continue
     except requests.exceptions.RequestException as e:
-        raise SystemExit(e)
+        sm_sites_present.append('{}')
+        print("Error Raised", e)
+        time.sleep(3)
+        continue
     
     sm_dict={} #Empty Dictionary to create a json response for a URL
     
@@ -91,11 +102,8 @@ for url in df['List of URL']:
             google_id = tag.attrs['href'].split('?')[-1]
             sm_dict['google'] = google_id.split('=')[-1]
             
-    sm_sites_present.append(sm_dict)
+    json_format = json.dumps(sm_dict, indent=4)
+    print(json_format)
+    sm_sites_present.append(json_format)
 
-print(sm_sites_present)
-
-#print(type(sm_dict))
-
-#json_format = json.dumps(sm_dict)
-#print(type(json_format))
+print("Final List: \n", sm_sites_present)
