@@ -5,6 +5,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import time
 
 #Reading the list of URL from a CSV File -- makes is scalable to address 'n' number of URL
 df = pd.read_csv('URL_List.csv')
@@ -12,10 +13,20 @@ df = pd.read_csv('URL_List.csv')
 print(df['List of URL'])
 
 url = 'http://www.zello.com'
+url2 ="http://zynga.com"
+url3 ="https://www.appannie.com"
 
-response = requests.get(url)
+response = requests.get(url2, timeout=10)
+#print(response.text)
 
-target_sites = ["facebook", "twitter"]
+#time.sleep(3)
+
+#r = requests.get(response.headers['Location'])
+#print(r.status_code)
+
+
+
+target_sites = ["facebook", "twitter", "itunes"]
 sm_sites_present = []
 
 soup = BeautifulSoup(response.content, 'html.parser')
@@ -36,12 +47,26 @@ for sm_site in target_sites:
                 sm_dict[sm_site] = split_list[-1]            
             #print(link.attrs['content'])
             if 'name' in link.attrs.keys():
-                if sm_site in link.attrs['name'] and 'site' in link.attrs['name']:
-                    print('Found second', link.attrs['content'])
-                    current_meta_content = link.attrs['content'].replace('@','')
-                    sm_dict[sm_site]= current_meta_content
+                if sm_site in link.attrs['name']:
+                    if 'site' in link.attrs['name']:
+                        print('Found second', link.attrs['content'])
+                        current_meta_content = link.attrs['content'].replace('@','')
+                        sm_dict[sm_site]= current_meta_content
+                    elif 'app' in link.attrs['name']:
+                        print("Found App ID", link.attrs['content'])
+                        app_id = link.attrs['content'].split("=")[-1]
+                        if sm_site =="itunes":
+                            sm_dict['ios'] = app_id
+                        else:
+                            sm_dict['google'] = app_id
+                
             
 sm_sites_present.append(sm_dict)
 
 #sm_sites_present = list(set(sm_sites_present))
 print(sm_sites_present)
+
+print(type(sm_dict))
+
+#json_format = json.dumps(sm_dict)
+#print(type(json_format))
