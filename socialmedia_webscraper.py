@@ -37,21 +37,21 @@ for url in df['List of URL']:
         response = requests.get(url, headers = headers, timeout=10)
     except Timeout:
         print("Timeout has been raised")
-        sm_sites_present.append('{}')
+        sm_sites_present.append(json.dumps({}, indent=4))
         time.sleep(3)
         continue
     except requests.exceptions.TooManyRedirects:
         print("Too many redirects")
-        sm_sites_present.append('{}')
+        sm_sites_present.append(json.dumps({}, indent=4))
         time.sleep(3)
         continue
     except ConnectionError:
         print("Badly Formatted URL")
-        sm_sites_present.append('{}')
+        sm_sites_present.append(json.dumps({}, indent=4))
         time.sleep(3)
         continue
     except requests.exceptions.RequestException as e:
-        sm_sites_present.append('{}')
+        sm_sites_present.append(json.dumps({}, indent=4))
         print("Error Raised", e)
         time.sleep(3)
         continue
