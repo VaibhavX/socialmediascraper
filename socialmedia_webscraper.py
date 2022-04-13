@@ -16,7 +16,7 @@ url = 'http://www.zello.com'
 url2 ="http://zynga.com"
 url3 ="https://www.appannie.com"
 
-response = requests.get(url2, timeout=10)
+response = requests.get(url, timeout=10)
 #print(response.text)
 
 #time.sleep(3)
@@ -26,7 +26,7 @@ response = requests.get(url2, timeout=10)
 
 
 
-target_sites = ["facebook", "twitter", "itunes"]
+target_sites = ["facebook", "twitter", "itunes" ,"google"]
 sm_sites_present = []
 
 soup = BeautifulSoup(response.content, 'html.parser')
@@ -52,13 +52,20 @@ for sm_site in target_sites:
                         print('Found second', link.attrs['content'])
                         current_meta_content = link.attrs['content'].replace('@','')
                         sm_dict[sm_site]= current_meta_content
+                    
+                    #Checking for Itunes or Google Play Id in the meta
                     elif 'app' in link.attrs['name']:
                         print("Found App ID", link.attrs['content'])
-                        app_id = link.attrs['content'].split("=")[-1]
-                        if sm_site =="itunes":
-                            sm_dict['ios'] = app_id
-                        else:
-                            sm_dict['google'] = app_id
+
+                        #Extracting APP ID
+                        meta_contents = link.attrs['content'].split(',')
+                        for item in meta_contents:
+                            if "app-id" in item:
+                                app_id = item.split("=")[-1]
+                                if sm_site =="itunes":
+                                    sm_dict['ios'] = app_id
+                                else:
+                                    sm_dict['google'] = app_id
                 
             
 sm_sites_present.append(sm_dict)
