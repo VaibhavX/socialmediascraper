@@ -15,8 +15,13 @@ print(df['List of URL'])
 url = 'http://www.zello.com'
 url2 ="http://zynga.com"
 url3 ="https://www.appannie.com"
+url4 ="https://www.data.ai"
+url5 ="https://www.zello.com/downloads/android/"
 
-response = requests.get(url, timeout=10)
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36', \
+            "Upgrade-Insecure-Requests": "1","DNT": "1","Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", \
+                 "Accept-Language": "en-US,en;q=0.5","Accept-Encoding": "gzip, deflate"}
+response = requests.get(url5, headers = headers, timeout=10)
 #print(response.text)
 
 #time.sleep(3)
@@ -26,7 +31,7 @@ response = requests.get(url, timeout=10)
 
 
 
-target_sites = ["facebook", "twitter", "itunes" ,"google"]
+target_sites = ["facebook", "twitter", "itunes" ,"play.google.com"]
 sm_sites_present = []
 
 soup = BeautifulSoup(response.content, 'html.parser')
@@ -66,7 +71,14 @@ for sm_site in target_sites:
                                     sm_dict['ios'] = app_id
                                 else:
                                     sm_dict['google'] = app_id
-                
+
+#Checking Separately for Google ID as they usually are in href
+all_tags = soup.find_all('a')
+for tag in all_tags:
+    if 'play.google.com' in tag.attrs['href']:
+        print("Found Google ID")
+        google_id = tag.attrs['href'].split('?')[-1]
+        sm_dict['google'] = google_id.split('=')[-1]
             
 sm_sites_present.append(sm_dict)
 
