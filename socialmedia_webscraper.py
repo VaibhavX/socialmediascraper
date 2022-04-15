@@ -97,7 +97,7 @@ for url in df['List of URL']:
     #Checking Separately for Google ID as they usually are in <a> tags inside href attribute that takes you to play.google.com
     all_tags = soup.find_all('a')
     for tag in all_tags:
-        if 'play.google.com' in tag.attrs['href']:
+        if 'href' in tag.attrs.keys() and 'play.google.com' in tag.attrs['href']:
             print("Found Google ID")
             google_id = tag.attrs['href'].split('?')[-1]
             sm_dict['google'] = google_id.split('=')[-1]
