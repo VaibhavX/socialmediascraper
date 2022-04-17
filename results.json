@@ -23,5 +23,10 @@
     "https://www.ycdb.co/company/airbnb": {
         "facebook": "airbnb",
         "twitter": "airbnb"
+    },
+    "https://www.airbnb.com": {
+        "twitter": "airbnb",
+        "ios": "401626263",
+        "google": "com.airbnb.android"
     }
 }
