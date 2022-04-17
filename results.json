@@ -1,3 +1,7 @@
 {
-    "https://www.doordash.com/": {}
+    "https://www.dropbox.com/": {
+        "facebook": "Dropbox",
+        "twitter": "Dropbox",
+        "ios": "327630330"
+    }
 }

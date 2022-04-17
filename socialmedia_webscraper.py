@@ -61,7 +61,7 @@ for url in df['List of URL']:
     sm_dict={} #Empty Dictionary to create a json response for a URL
     target_check = [0,0,0,0]
     
-    soup = BeautifulSoup(response.content, 'html.parser')
+    soup = BeautifulSoup(response.content, 'html5lib')
 
     #Cheking the Meta Tags First - High Probability of finding Facebook, Twitter and Apple ID as they are usually embedded in meta tags
     all_links = soup.find_all('meta')   
@@ -114,7 +114,7 @@ for url in df['List of URL']:
         #Checking Separately for Google ID as they usually are in <a> tags inside href attribute that takes you to play.google.com
         all_tags = soup.find_all('a')
         for tag in all_tags:
-            print(tag)
+            #print(tag)
             if 'href' in tag.attrs.keys():
                 #print("Checking")
                 #print(sm_site)
@@ -128,8 +128,14 @@ for url in df['List of URL']:
                         target_check[idx] = 1
                     else:
                         if 'facebook.com' in tag.attrs['href'] or 'twitter.com' in tag.attrs['href']:
-                            print("Found ID for {}".format(sm_site))
-                            sm_dict[target_keys[idx]] = tag.attrs['href'].split('/')[-1]
+                            print("Found ID here for {}".format(sm_site))
+                            #print(tag.attrs['href'])
+                            href_content = tag.attrs['href'].split('/')
+                            #print(href_content)
+                            if href_content[-1] == '':
+                                href_content.pop()
+                            #print(href_content)
+                            sm_dict[target_keys[idx]] = href_content[-1]
                             target_check[idx] = 1
                         elif 'itunes.apple.com' in tag.attrs['href']:
                             print("Apple ID found for {}".format(sm_site))
@@ -140,7 +146,7 @@ for url in df['List of URL']:
                             target_check[idx] = 1
         
         find_fb = soup.find_all('div')
-        print(find_fb)
+        #print(find_fb)
     
             
     json_format = json.dumps(sm_dict, indent=4)
