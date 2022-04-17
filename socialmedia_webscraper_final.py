@@ -80,6 +80,13 @@ def check_href(soup, sm_dict, target_check):
                             print("Found ID for {}".format(sm_site))
                             sm_dict[target_keys[idx]] = tag.attrs['href'].split('/')[-1]
                             target_check[idx] = 1
+                        elif 'itunes.apple.com' in tag.attrs['href']:
+                            print("Apple ID found for {}".format(sm_site))
+                            apple_id = tag.attrs['href'].split('/')[-1]
+                            if 'id' in apple_id:
+                                apple_id = apple_id[2:]
+                            sm_dict[target_keys[idx]] = apple_id 
+                            target_check[idx] = 1
     return sm_dict, target_check
 
 

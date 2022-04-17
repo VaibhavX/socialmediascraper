@@ -1,32 +1,3 @@
 {
-    "https://www.appannie.com": {
-        "facebook": "data.ai.levelup",
-        "twitter": "dataai",
-        "ios": "1544122271"
-    },
-    "http://www.zello.com": {
-        "facebook": "ZelloMe",
-        "twitter": "Zello",
-        "ios": "508231856"
-    },
-    "http://zynga.com": {
-        "facebook": "zynga",
-        "twitter": "zynga"
-    },
-    "https://www.ycdb.co/top-companies/funding": {},
-    "https://www.zello.com/downloads/android/": {
-        "facebook": "ZelloMe",
-        "twitter": "Zello",
-        "ios": "508231856",
-        "google": "com.loudtalks"
-    },
-    "https://www.ycdb.co/company/airbnb": {
-        "facebook": "airbnb",
-        "twitter": "airbnb"
-    },
-    "https://www.airbnb.com": {
-        "twitter": "airbnb",
-        "ios": "401626263",
-        "google": "com.airbnb.android"
-    }
+    "https://www.doordash.com/": {}
 }

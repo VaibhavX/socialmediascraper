@@ -11,8 +11,8 @@ from requests.exceptions import ConnectionError
 
 
 #Reading the list of URL from a CSV File -- makes is scalable to address 'n' number of URL
-df = pd.read_csv('URL_List.csv')
-#df = pd.read_csv('Testurl.csv')
+#df = pd.read_csv('URL_List.csv')
+df = pd.read_csv('Testurl.csv')
 #print(df['List of URL'])  #Uncomment this command to test the list of URL present as input
 
 '''
@@ -114,12 +114,13 @@ for url in df['List of URL']:
         #Checking Separately for Google ID as they usually are in <a> tags inside href attribute that takes you to play.google.com
         all_tags = soup.find_all('a')
         for tag in all_tags:
-            #print(tag)
+            print(tag)
             if 'href' in tag.attrs.keys():
                 #print("Checking")
                 #print(sm_site)
                 #print(tag.attrs['href'])
                 if sm_site in tag.attrs['href'] and target_check[idx] == 0:
+                    print('Checking inside')
                     if sm_site =='play.google.com':
                         print("Found Google ID")
                         google_id = tag.attrs['href'].split('?')[-1]
@@ -130,7 +131,16 @@ for url in df['List of URL']:
                             print("Found ID for {}".format(sm_site))
                             sm_dict[target_keys[idx]] = tag.attrs['href'].split('/')[-1]
                             target_check[idx] = 1
+                        elif 'itunes.apple.com' in tag.attrs['href']:
+                            print("Apple ID found for {}".format(sm_site))
+                            apple_id = tag.attrs['href'].split('/')[-1]
+                            if 'id' in apple_id:
+                                apple_id = apple_id[2:]
+                            sm_dict[target_keys[idx]] = apple_id 
+                            target_check[idx] = 1
         
+        find_fb = soup.find_all('div')
+        print(find_fb)
     
             
     json_format = json.dumps(sm_dict, indent=4)
