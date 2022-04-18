@@ -160,6 +160,8 @@ for url in df['List of URL']:
                             apple_id = tag.attrs['href'].split('/')[-1]
                             if 'id' in apple_id:
                                 apple_id = apple_id[2:]
+                            if '?' in apple_id:
+                                apple_id = apple_id.split('?')[0]
                             sm_dict[target_keys[idx]] = apple_id 
                             target_check[idx] = 1
         
