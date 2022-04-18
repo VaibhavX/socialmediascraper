@@ -78,8 +78,8 @@
     },
     "https://www.lendup.com/": {},
     "https://www.docker.com/": {
-        "facebook": "docker.run",
-        "twitter": "docker"
+        "twitter": "Docker",
+        "facebook": "docker.run"
     },
     "https://www.ancestry.com/": {},
     "https://checkr.com/": {},
@@ -295,5 +295,51 @@
         "ios": "1299832054",
         "facebook": "teamvidyard",
         "twitter": "vidyard"
+    },
+    "https://webflow.com/": {
+        "facebook": "webflow",
+        "twitter": "webflow"
+    },
+    "https://clever.com/": {
+        "facebook": "clever",
+        "twitter": "clever"
+    },
+    "https://go.wepay.com/": {
+        "twitter": "wepay"
+    },
+    "http://tilt.com/": {},
+    "https://boostedusa.com/": {},
+    "http://www.metavision.com/": {},
+    "https://www.lever.co/": {
+        "facebook": "leverapp",
+        "twitter": "lever"
+    },
+    "https://ongrin.com/": {},
+    "https://soylent.com/": {
+        "facebook": "Soylent",
+        "twitter": "soylent"
+    },
+    "https://genius.com/": {
+        "twitter": "genius"
+    },
+    "https://mariadb.com/products/enterprise/xpand/": {
+        "twitter": "mariadb",
+        "facebook": "MariaDB.dbms"
+    },
+    "https://www.eightsleep.com/": {
+        "facebook": "eightsleep",
+        "twitter": "eightsleep"
+    },
+    "https://www.axoni.com/": {
+        "twitter": "Axoni"
+    },
+    "https://mattermost.com/": {
+        "facebook": "Mattermost-2300985916642531",
+        "twitter": "Mattermost"
+    },
+    "https://www.vouch.us/": {},
+    "https://www.novacredit.com/": {
+        "facebook": "novacredit",
+        "twitter": "nova_credit"
     }
 }

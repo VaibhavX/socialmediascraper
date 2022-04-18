@@ -94,7 +94,7 @@ for url in df['List of URL']:
                 #print(link.attrs['content'])
                 if 'name' in link.attrs.keys():
                     if sm_site in link.attrs['name']:
-                        print(link.attrs['name'], link.attrs['content'])
+                        #print(link.attrs['name'], link.attrs['content'])
                         if 'site' in link.attrs['name'] and link.attrs['content']!= "" and target_check[idx] ==0:
                             print('Found second', link.attrs['content'])
                             current_meta_content = link.attrs['content'].replace('@','')
