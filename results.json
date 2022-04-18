@@ -1,7 +1,52 @@
 {
-    "https://www.dropbox.com/": {
-        "facebook": "Dropbox",
+    "https://www.appannie.com": {
+        "facebook": "data.ai.levelup",
+        "twitter": "dataai",
+        "ios": "1544122271"
+    },
+    "http://www.zello.com": {
+        "facebook": "ZelloMe",
+        "twitter": "Zello",
+        "ios": "508231856"
+    },
+    "http://zynga.com": {
+        "facebook": "zynga",
+        "twitter": "zynga"
+    },
+    "https://www.ycdb.co/top-companies/funding": {},
+    "https://www.zello.com/downloads/android/": {
+        "facebook": "ZelloMe",
+        "twitter": "Zello",
+        "ios": "508231856",
+        "google": "com.loudtalks"
+    },
+    "https://www.ycdb.co/company/airbnb": {
+        "facebook": "airbnb",
+        "twitter": "airbnb"
+    },
+    "https://www.airbnb.com": {
+        "twitter": "airbnb",
+        "ios": "401626263",
+        "google": "com.airbnb.android"
+    },
+    "https://www.getcruise.com/": {
+        "twitter": "Cruise"
+    },
+    "https://www.instacart.com": {
+        "facebook": "Instacart",
+        "twitter": "instacart",
+        "ios": "545599256",
+        "google": "com.instacart.client"
+    },
+    "https://www.dropbox.com": {
         "twitter": "Dropbox",
-        "ios": "327630330"
+        "ios": "327630330",
+        "facebook": "Dropbox"
+    },
+    "https://stripe.com/": {
+        "twitter": "stripe"
+    },
+    "https://www.rappi.com/": {
+        "twitter": "RappiColombia"
     }
 }
