@@ -126,7 +126,9 @@ for url in df['List of URL']:
                     print('Checking inside')
                     if sm_site =='play.google.com':
                         print("Found Google ID")
+                        print(tag.attrs['href'])
                         google_id = tag.attrs['href'].split('?')[-1]
+                        google_id = google_id.split('&')[0]
                         sm_dict['google'] = google_id.split('=')[-1]
                         target_check[idx] = 1
                     else:

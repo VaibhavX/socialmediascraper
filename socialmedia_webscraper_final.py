@@ -75,6 +75,7 @@ def check_href(soup, sm_dict, target_check):
                     if sm_site =='play.google.com':
                         print("Found Google ID")
                         google_id = tag.attrs['href'].split('?')[-1]
+                        google_id = google_id.split('&')[0] #if there are multiple arguments present select the portion with id
                         sm_dict['google'] = google_id.split('=')[-1]
                         target_check[idx] = 1
                     else:
