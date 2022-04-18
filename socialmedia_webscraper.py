@@ -105,7 +105,7 @@ for url in df['List of URL']:
                         elif 'creator' in link.attrs['name'] and target_check[idx] ==0:
                             print("Twitter Creator Found", link.attrs['content'])
                             if sm_site == "twitter":
-                                sm_dict[sm_site] = link.attrs['content']
+                                sm_dict[sm_site] = link.attrs['content'].replace('@', '')
                                 target_check[idx] = 1
 
                         #Checking for Itunes or Google Play Id in the meta
@@ -171,6 +171,16 @@ for url in df['List of URL']:
                                 apple_id = apple_id.split('?')[0]
                             sm_dict[target_keys[idx]] = apple_id 
                             target_check[idx] = 1
+                if 'apple.com' in tag.attrs['href'] and target_check[2] == 0:
+                    print("Found Apple Link", tag.attrs['href'])
+                    apple_id = tag.attrs['href'].split('/')[-1]
+                    if 'id' in apple_id:
+                        apple_id = apple_id[2:]
+                    if '?' in apple_id:
+                        apple_id = apple_id.split('?')[0]
+                    sm_dict['ios'] = apple_id
+                    target_check[2] = 1
+
         
         find_fb = soup.find_all('div')
         #print(find_fb)
