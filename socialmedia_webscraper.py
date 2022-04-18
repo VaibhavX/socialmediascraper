@@ -173,8 +173,11 @@ for url in df['List of URL']:
                             final_id = href_content[-1]
                             if '?' in final_id:
                                 final_id = final_id.split('?')[0]
-                            sm_dict[target_keys[idx]] = final_id
-                            target_check[idx] = 1
+                            if 'status' in tag.attrs['href']:
+                                print("Incorrect URL picked")
+                            else:
+                                sm_dict[target_keys[idx]] = final_id
+                                target_check[idx] = 1
                         elif 'itunes.apple.com' in tag.attrs['href']:
                             print("Apple ID found for {}".format(sm_site))
                             apple_id = tag.attrs['href'].split('/')[-1]
