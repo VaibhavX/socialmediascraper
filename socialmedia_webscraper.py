@@ -82,8 +82,9 @@ for url in df['List of URL']:
                     print('Found', current_meta_content)
                     if sm_site =="facebook" and "facebook.com/" not in link.attrs['content']:
                         print("Incorrect Facebook URL")
+                    elif sm_site =='twitter' and "twitter.com/" not in link.attrs['content']:
+                        print("Incorrect Twitter URL")
                     else:
-
                         split_list = current_meta_content.split('/')
                         if split_list[-1] =="":
                             split_list.pop() 
@@ -178,6 +179,8 @@ for url in df['List of URL']:
                         apple_id = apple_id[2:]
                     if '?' in apple_id:
                         apple_id = apple_id.split('?')[0]
+                    if apple_id[-1] == '#':
+                        apple_id = apple_id[:-1]
                     sm_dict['ios'] = apple_id
                     target_check[2] = 1
 

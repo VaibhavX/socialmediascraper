@@ -1,8 +1,6 @@
 {
-    "https://www.stilt.com/": {
-        "ios": "1520752590",
-        "facebook": "yourstilt",
-        "twitter": "stilt_inc",
-        "google": "com.stilt.mobile"
+    "https://sift.com/": {
+        "facebook": "GetSift",
+        "twitter": "GetSift"
     }
 }
