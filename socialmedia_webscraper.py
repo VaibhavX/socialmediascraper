@@ -2,6 +2,7 @@
     This includes Twitter and Facebook and if there any app store ID - Google Play or Apple.
     This code should handle redirects, timeouts and badly formatted urls'''
 import json
+from typing import final
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -169,7 +170,10 @@ for url in df['List of URL']:
                             #print(href_content)
                             if 'pages' in tag.attrs['href']:
                                 href_content.pop()
-                            sm_dict[target_keys[idx]] = href_content[-1]
+                            final_id = href_content[-1]
+                            if '?' in final_id:
+                                final_id = final_id.split('?')[0]
+                            sm_dict[target_keys[idx]] = final_id
                             target_check[idx] = 1
                         elif 'itunes.apple.com' in tag.attrs['href']:
                             print("Apple ID found for {}".format(sm_site))
