@@ -37,7 +37,7 @@ def check_meta(soup, sm_dict, target_check):
                         target_check[idx] = 1           
                 if 'name' in link.attrs.keys():
                     if sm_site in link.attrs['name']:
-                        if 'site' in link.attrs['name'] and target_check[idx] ==0:
+                        if 'site' in link.attrs['name'] and link.attrs['content']!= "" and target_check[idx] ==0:
                             print('Found second', link.attrs['content'])
                             current_meta_content = link.attrs['content'].replace('@','')
                             if not current_meta_content.isascii(): #Checking for any Unicode character and remove it
