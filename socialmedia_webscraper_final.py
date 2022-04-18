@@ -47,7 +47,7 @@ def check_meta(soup, sm_dict, target_check):
                         elif 'creator' in link.attrs['name'] and target_check[idx] ==0:
                             print("Twitter Creator Found", link.attrs['content'])
                             if sm_site == "twitter":
-                                sm_dict[sm_site] = link.attrs['content']
+                                sm_dict[sm_site] = link.attrs['content'].replace('@','')
                                 target_check[idx] = 1
 
                         #Checking for Itunes or Google Play Id in the meta
