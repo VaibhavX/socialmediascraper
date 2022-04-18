@@ -75,7 +75,13 @@ def check_meta(soup, sm_dict, target_check):
                                     else:
                                         sm_dict['google'] = app_id
                                         target_check[idx] =1
-    
+                #For Exception Case of ID as content itself
+                if 'property' in link.attrs.keys() and sm_site in link.attrs['property'] and 'title' in link.attrs['property'] and target_check[idx] == 0:
+                    print("Found ID in property", current_meta_content)
+                    if len(current_meta_content.split(" "))== 1:
+                        sm_dict[sm_site] = current_meta_content
+                        target_check[idx] = 1
+
     return sm_dict, target_check
 
 #Function to check the <a> tags and the attribute 'href' for missing ID values and add to response if available

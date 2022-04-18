@@ -133,6 +133,12 @@ for url in df['List of URL']:
                                     else:
                                         sm_dict['google'] = app_id
                                         target_check[idx] =1
+                if 'property' in link.attrs.keys() and sm_site in link.attrs['property'] and 'title' in link.attrs['property'] and target_check[idx] == 0:
+                    print("Found ID in property", current_meta_content)
+                    if len(current_meta_content.split(" "))== 1:
+                        sm_dict[sm_site] = current_meta_content
+                        target_check[idx] = 1
+
 
         #Checking Separately for Google ID as they usually are in <a> tags inside href attribute that takes you to play.google.com
         all_tags = soup.find_all('a')
