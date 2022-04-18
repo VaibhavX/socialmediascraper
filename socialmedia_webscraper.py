@@ -213,5 +213,5 @@ final_json_obj = json.dumps(sm_sites_present, indent=4)
 print("Final List: \n", final_json_obj)
 
 
-with open("results.json", "w") as outfile:
+with open("results_test.json", "w") as outfile:
     outfile.write(final_json_obj)
