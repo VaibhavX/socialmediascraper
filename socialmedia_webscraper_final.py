@@ -98,6 +98,8 @@ def check_href(soup, sm_dict, target_check):
                             href_content = tag.attrs['href'].split('/')
                             if href_content[-1] == '':
                                 href_content.pop()
+                            if 'pages' in tag.attrs['href']:
+                                href_content.pop()
                             sm_dict[target_keys[idx]] = href_content[-1]
                             target_check[idx] = 1
                         elif 'itunes.apple.com' in tag.attrs['href']:

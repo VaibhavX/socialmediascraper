@@ -1,6 +1,8 @@
 {
-    "https://sift.com/": {
-        "facebook": "GetSift",
-        "twitter": "GetSift"
+    "https://www.scribd.com/": {
+        "ios": "542557212",
+        "facebook": "Scribd",
+        "twitter": "scribd",
+        "google": "com.scribd.app.reader0"
     }
 }
