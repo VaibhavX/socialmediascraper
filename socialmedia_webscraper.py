@@ -74,7 +74,9 @@ for url in df['List of URL']:
                 current_meta_content = link.attrs['content']
                 if sm_site in current_meta_content and target_check[idx] ==0:
                     print('Found', current_meta_content)
-                    split_list = current_meta_content.split('/') 
+                    split_list = current_meta_content.split('/')
+                    if split_list[-1] =="":
+                        split_list.pop() 
                     sm_dict[sm_site] = split_list[-1] 
                     target_check[idx] = 1           
                 #print(link.attrs['content'])

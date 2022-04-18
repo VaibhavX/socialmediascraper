@@ -25,7 +25,9 @@ def check_meta(soup, sm_dict, target_check):
                 current_meta_content = link.attrs['content']
                 if sm_site in current_meta_content and target_check[idx] ==0:
                     print('Found', current_meta_content)
-                    split_list = current_meta_content.split('/') 
+                    split_list = current_meta_content.split('/')
+                    if split_list[-1] =="": #Condition to elimitate null if present
+                        split_list.pop()  
                     sm_dict[sm_site] = split_list[-1] 
                     target_check[idx] = 1           
                 if 'name' in link.attrs.keys():
