@@ -94,6 +94,7 @@ for url in df['List of URL']:
                 #print(link.attrs['content'])
                 if 'name' in link.attrs.keys():
                     if sm_site in link.attrs['name']:
+                        print(link.attrs['name'], link.attrs['content'])
                         if 'site' in link.attrs['name'] and link.attrs['content']!= "" and target_check[idx] ==0:
                             print('Found second', link.attrs['content'])
                             current_meta_content = link.attrs['content'].replace('@','')
@@ -109,7 +110,11 @@ for url in df['List of URL']:
                             if sm_site == "twitter":
                                 sm_dict[sm_site] = link.attrs['content'].replace('@', '')
                                 target_check[idx] = 1
-
+                        #Checking only for Twitter Title is creator and site not present
+                        elif 'title' in link.attrs['name'] and sm_site =="twitter" and target_check[idx] ==0:
+                            if link.attrs['content']!="" and len(link.attrs['content'].split(" ")) == 1:
+                                sm_dict[sm_site] = link.attrs['content']
+                                target_check[idx] = 1
                         #Checking for Itunes or Google Play Id in the meta
                         elif 'app' in link.attrs['name']:
                             print("Found App ID", link.attrs['content'], " ", link.attrs['name'])

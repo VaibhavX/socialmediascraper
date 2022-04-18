@@ -52,6 +52,12 @@ def check_meta(soup, sm_dict, target_check):
                                 sm_dict[sm_site] = link.attrs['content'].replace('@','')
                                 target_check[idx] = 1
 
+                        #Checking only for Twitter Title is creator and site not present
+                        elif 'title' in link.attrs['name'] and sm_site =="twitter" and target_check[idx] ==0:
+                            if link.attrs['content']!="" and len(link.attrs['content'].split(" ")) == 1:
+                                sm_dict[sm_site] = link.attrs['content']
+                                target_check[idx] = 1
+                                
                         #Checking for Itunes or Google Play Id in the meta
                         elif 'app' in link.attrs['name']:
                             print("Found App ID", link.attrs['content'], " ", link.attrs['name'])
