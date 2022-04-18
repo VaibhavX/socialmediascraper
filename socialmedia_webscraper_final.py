@@ -42,7 +42,14 @@ def check_meta(soup, sm_dict, target_check):
                                 current_meta_content = (current_meta_content.encode('ascii', 'ignore')).decode('utf-8')
                             sm_dict[sm_site]= current_meta_content.strip() #Removes any leading or trailing spaces
                             target_check[idx] = 1
-                    
+                        
+                        #Checking if Twitter Creator is present in name attribute
+                        elif 'creator' in link.attrs['name'] and target_check[idx] ==0:
+                            print("Twitter Creator Found", link.attrs['content'])
+                            if sm_site == "twitter":
+                                sm_dict[sm_site] = link.attrs['content']
+                                target_check[idx] = 1
+
                         #Checking for Itunes or Google Play Id in the meta
                         elif 'app' in link.attrs['name']:
                             print("Found App ID", link.attrs['content'], " ", link.attrs['name'])

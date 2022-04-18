@@ -1,8 +1,5 @@
 {
-    "https://theathletic.com/": {
-        "facebook": "TheAthletic",
-        "twitter": "TheAthletic",
-        "ios": "1135216317",
-        "google": "com.theathletic"
+    "https://gocardless.com/": {
+        "twitter": "GoCardless"
     }
 }
