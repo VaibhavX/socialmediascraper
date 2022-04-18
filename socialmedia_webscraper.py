@@ -8,6 +8,7 @@ import pandas as pd
 import time
 from requests.exceptions import Timeout
 from requests.exceptions import ConnectionError
+#import cloudscraper
 
 
 #Reading the list of URL from a CSV File -- makes is scalable to address 'n' number of URL
@@ -39,25 +40,30 @@ for url in df['List of URL']:
         response = requests.get(url, headers = headers, timeout=10)
     except Timeout:
         print("Timeout has been raised")
-        sm_sites_present.append(json.dumps({}, indent=4))
+        sm_sites_present[url] ={}
         time.sleep(3)
         continue
     except requests.exceptions.TooManyRedirects:
         print("Too many redirects")
-        sm_sites_present.append(json.dumps({}, indent=4))
+        sm_sites_present[url] ={}
         time.sleep(3)
         continue
     except ConnectionError:
         print("Badly Formatted URL")
-        sm_sites_present.append(json.dumps({}, indent=4))
+        sm_sites_present[url] ={}
         time.sleep(3)
         continue
     except requests.exceptions.RequestException as e:
-        sm_sites_present.append(json.dumps({}, indent=4))
+        sm_sites_present[url] ={}
         print("Error Raised", e)
         time.sleep(3)
         continue
     
+    #if response.status_code == 403:
+    #    print("CloudFare Issue")
+    #    scraper = cloudscraper.create_scraper()
+    #    print(scraper.get(url).status_code)
+
     sm_dict={} #Empty Dictionary to create a json response for a URL
     target_check = [0,0,0,0]
     
@@ -74,11 +80,15 @@ for url in df['List of URL']:
                 current_meta_content = link.attrs['content']
                 if sm_site in current_meta_content and target_check[idx] ==0:
                     print('Found', current_meta_content)
-                    split_list = current_meta_content.split('/')
-                    if split_list[-1] =="":
-                        split_list.pop() 
-                    sm_dict[sm_site] = split_list[-1] 
-                    target_check[idx] = 1           
+                    if sm_site =="facebook" and "facebook.com/" not in link.attrs['content']:
+                        print("Incorrect Facebook URL")
+                    else:
+
+                        split_list = current_meta_content.split('/')
+                        if split_list[-1] =="":
+                            split_list.pop() 
+                        sm_dict[sm_site] = split_list[-1] 
+                        target_check[idx] = 1           
                 #print(link.attrs['content'])
                 if 'name' in link.attrs.keys():
                     if sm_site in link.attrs['name']:
@@ -126,6 +136,7 @@ for url in df['List of URL']:
                 #print(tag.attrs['href'])
                 if sm_site in tag.attrs['href'] and target_check[idx] == 0:
                     print('Checking inside')
+                    print(sm_site, tag.attrs['href'])
                     if sm_site =='play.google.com':
                         print("Found Google ID")
                         print(tag.attrs['href'])
